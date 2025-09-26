@@ -29,7 +29,7 @@ export function HorizontalMasonry({ rowCount, imageDisplayHeight }: HorizontalMa
     <div className="flex flex-col gap-1 w-max">
       {imageRows.map((row, index) => (
         // biome-ignore lint: array index key
-        <div key={index} className="flex gap-1">
+        <div key={index} className="flex gap-1 [&>*:last-child]:grow">
           {row.map((image) => {
             const imageDisplayWidth = calculateDisplayWidth(
               image.width,
