@@ -1,10 +1,9 @@
 import { HorizontalMasonry } from '@/components/horizontal-masonry'
-import { cn } from '@/lib/utils'
 
 export default function Home() {
   return (
-    <main className={cn('flex min-h-screen w-full items-center justify-center')}>
-      <div className="relative max-w-screen">
+    <main className="min-h-screen w-full relative overflow-hidden">
+      <div className="max-w-screen absolute translate-y-[-50%] translate-x-[-50%] top-1/2 left-1/2">
         <div className="overflow-x-auto no-scrollbar ps-10 pe-10">
           <HorizontalMasonry rowCount={3} imageDisplayHeight={300} />
         </div>
