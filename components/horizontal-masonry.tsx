@@ -10,42 +10,43 @@ interface HorizontalMasonryProps {
   imageDisplayHeight: number
 }
 
+type ImageWithDisplayDimensions = ImageData & { displayWidth: number }
+
 export function HorizontalMasonry({ rowCount, imageDisplayHeight }: HorizontalMasonryProps) {
   const imageRows = useMemo(() => {
-    const rows: ImageData[][] = Array.from({ length: rowCount }, () => [])
+    const rows: ImageWithDisplayDimensions[][] = Array.from({ length: rowCount }, () => [])
     const rowWidths = Array(rowCount).fill(0)
 
     // Distribute images to the row with least total width
     images.forEach((image) => {
+      const imageDisplayWidth = calculateDisplayWidth(image.width, image.height, imageDisplayHeight)
+      const imageWithDimensions: ImageWithDisplayDimensions = {
+        ...image,
+        displayWidth: imageDisplayWidth,
+      }
+
       const minWidthIndex = rowWidths.indexOf(Math.min(...rowWidths))
-      rows[minWidthIndex].push(image)
-      rowWidths[minWidthIndex] += image.width
+      rows[minWidthIndex].push(imageWithDimensions)
+      rowWidths[minWidthIndex] += imageDisplayWidth
     })
 
     return rows
-  }, [rowCount])
+  }, [rowCount, imageDisplayHeight])
 
   return (
     <div className="flex flex-col gap-1 w-max">
       {imageRows.map((row, index) => (
         // biome-ignore lint: array index key
         <div key={index} className="flex gap-1 [&>*:last-child]:grow">
-          {row.map((image) => {
-            const imageDisplayWidth = calculateDisplayWidth(
-              image.width,
-              image.height,
-              imageDisplayHeight
-            )
-            return (
-              <ImageCard
-                key={image.id}
-                src={image.fileName}
-                title={image.title}
-                width={imageDisplayWidth}
-                height={imageDisplayHeight}
-              />
-            )
-          })}
+          {row.map((image) => (
+            <ImageCard
+              key={image.id}
+              src={image.fileName}
+              title={image.title}
+              width={image.displayWidth}
+              height={imageDisplayHeight}
+            />
+          ))}
         </div>
       ))}
     </div>
