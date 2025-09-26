@@ -26,7 +26,7 @@ export function HorizontalMasonry({ rowCount, imageDisplayHeight }: HorizontalMa
   }, [rowCount])
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 w-max">
       {imageRows.map((row, index) => (
         // biome-ignore lint: array index key
         <div key={index} className="flex gap-1">

@@ -6,10 +6,12 @@ export default function Home() {
     <main
       className={cn(
         'flex min-h-screen w-full items-center justify-center',
-        'bg-[rgba(0,0,0,0.01)] bg-[radial-gradient(rgba(0,0,0,0.3)_0.6px,transparent_0.6px)] bg-[length:24px_24px]'
+        'bg-[rgba(0,0,0,0.01)] bg-[radial-gradient(rgba(0,0,0,0.3)_0.6px,transparent_0.6px)] bg-[length:220px_24px]'
       )}
     >
-      <HorizontalMasonry rowCount={3} imageDisplayHeight={300} />
+      <div className="overflow-x-auto no-scrollbar ps-20 pe-20">
+        <HorizontalMasonry rowCount={3} imageDisplayHeight={300} />
+      </div>
     </main>
   )
 }
