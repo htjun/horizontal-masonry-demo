@@ -8,12 +8,13 @@ import { useWheelToHorizontalScroll } from '@/hooks/use-wheel-to-horizontal-scro
 export default function Home() {
   const scrollRef = useWheelToHorizontalScroll<HTMLDivElement>()
   const [rowCount, setRowCount] = useState('3')
+  const [imageHeight, setImageHeight] = useState('300')
 
   return (
     <main className="min-h-screen w-full relative overflow-hidden">
       <div className="max-w-screen absolute translate-y-[-50%] translate-x-[-50%] top-1/2 left-1/2">
         <div ref={scrollRef} className="overflow-x-auto no-scrollbar ps-10 pe-10">
-          <HorizontalMasonry rowCount={Number(rowCount)} imageDisplayHeight={300} />
+          <HorizontalMasonry rowCount={Number(rowCount)} imageDisplayHeight={Number(imageHeight)} />
         </div>
         {/* Left edge fade effect */}
         <div className="edge-fade left-0 mask-linear-[to_right,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />
@@ -35,7 +36,18 @@ export default function Home() {
             triggerPrefix="Row:"
             ariaLabel="Row count"
           />
-          <div>Height: 300</div>
+          <Select
+            value={imageHeight}
+            onValueChange={setImageHeight}
+            options={[
+              { value: '200', label: '200' },
+              { value: '300', label: '300' },
+              { value: '400', label: '400' },
+              { value: '500', label: '500' },
+            ]}
+            triggerPrefix="Height:"
+            ariaLabel="Image height"
+          />
         </div>
       </div>
     </main>
