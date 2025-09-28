@@ -13,9 +13,9 @@ export default function Home() {
           <HorizontalMasonry rowCount={3} imageDisplayHeight={300} />
         </div>
         {/* Left edge fade effect */}
-        <div className="absolute left-0 top-0 h-full w-[40px] pointer-events-none bg-white backdrop-blur-[32px] mask-linear-[to_right,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />
+        <div className="edge-fade left-0 mask-linear-[to_right,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />
         {/* Right edge fade effect */}
-        <div className="absolute right-0 top-0 h-full w-[40px] pointer-events-none bg-white backdrop-blur-[32px] mask-linear-[to_left,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />
+        <div className="edge-fade right-0 mask-linear-[to_left,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />
       </div>
     </main>
   )

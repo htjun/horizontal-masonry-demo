@@ -4,6 +4,10 @@
   @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
 }
 
+@utility edge-fade {
+  @apply absolute top-0 h-full w-[40px] pointer-events-none bg-white backdrop-blur-[32px];
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
