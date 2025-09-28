@@ -17,7 +17,7 @@ export default function Home() {
     <main ref={mainRef} className="min-h-screen w-full relative overflow-hidden">
       <div className="w-full bg-white/80 border-b border-white/40 py-2 min-h-14 px-10 text-xs font-medium backdrop-blur-sm text-black/70 flex justify-between items-center select-none">
         <h1 className="cursor-default">Horizontal Masonry Feed</h1>
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-6 items-center">
           <div className="flex gap-1.5 items-center">
             <span>Rows:</span>
             <ToggleGroup
@@ -31,13 +31,18 @@ export default function Home() {
               ariaLabel="Row count"
             />
           </div>
-          <button
-            onClick={() => setShowCount(!showCount)}
-            className="hover:text-black transition-colors cursor-pointer select-none"
-            type="button"
-          >
-            Count: {showCount ? 'On' : 'Off'}
-          </button>
+          <div className="flex gap-1.5 items-center">
+            <span>Count:</span>
+            <ToggleGroup
+              value={showCount ? 'on' : 'off'}
+              onValueChange={(value) => setShowCount(value === 'on')}
+              options={[
+                { value: 'off', label: 'Off' },
+                { value: 'on', label: 'On' },
+              ]}
+              ariaLabel="Show count"
+            />
+          </div>
         </div>
       </div>
       <div className="max-w-screen absolute translate-x-[-50%] left-1/2">
