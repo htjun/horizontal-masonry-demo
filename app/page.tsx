@@ -9,12 +9,17 @@ export default function Home() {
   const scrollRef = useWheelToHorizontalScroll<HTMLDivElement>()
   const [rowCount, setRowCount] = useState('3')
   const [imageHeight, setImageHeight] = useState('300')
+  const [showCount, setShowCount] = useState(false)
 
   return (
     <main className="min-h-screen w-full relative overflow-hidden">
       <div className="max-w-screen absolute translate-y-[-50%] translate-x-[-50%] top-1/2 left-1/2">
         <div ref={scrollRef} className="overflow-x-auto no-scrollbar ps-10 pe-10">
-          <HorizontalMasonry rowCount={Number(rowCount)} imageDisplayHeight={Number(imageHeight)} />
+          <HorizontalMasonry
+            rowCount={Number(rowCount)}
+            imageDisplayHeight={Number(imageHeight)}
+            showCount={showCount}
+          />
         </div>
         {/* Left edge fade effect */}
         <div className="edge-fade left-0 mask-linear-[to_right,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />
@@ -48,6 +53,13 @@ export default function Home() {
             triggerPrefix="Height:"
             ariaLabel="Image height"
           />
+          <button
+            onClick={() => setShowCount(!showCount)}
+            className="hover:text-black transition-colors cursor-pointer select-none"
+            type="button"
+          >
+            Count: {showCount ? 'On' : 'Off'}
+          </button>
         </div>
       </div>
     </main>

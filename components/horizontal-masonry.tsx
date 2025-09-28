@@ -8,21 +8,27 @@ import { ImageCard } from './image-card'
 interface HorizontalMasonryProps {
   rowCount: number
   imageDisplayHeight: number
+  showCount: boolean
 }
 
-type ImageWithDisplayDimensions = ImageData & { displayWidth: number }
+type ImageWithDisplayDimensions = ImageData & { displayWidth: number; sequentialIndex: number }
 
-export function HorizontalMasonry({ rowCount, imageDisplayHeight }: HorizontalMasonryProps) {
+export function HorizontalMasonry({
+  rowCount,
+  imageDisplayHeight,
+  showCount,
+}: HorizontalMasonryProps) {
   const imageRows = useMemo(() => {
     const rows: ImageWithDisplayDimensions[][] = Array.from({ length: rowCount }, () => [])
     const rowWidths = Array(rowCount).fill(0)
 
     // Distribute images to the row with least total width
-    images.forEach((image) => {
+    images.forEach((image, index) => {
       const imageDisplayWidth = calculateDisplayWidth(image.width, image.height, imageDisplayHeight)
       const imageWithDimensions: ImageWithDisplayDimensions = {
         ...image,
         displayWidth: imageDisplayWidth,
+        sequentialIndex: index + 1,
       }
 
       const minWidthIndex = rowWidths.indexOf(Math.min(...rowWidths))
@@ -45,6 +51,8 @@ export function HorizontalMasonry({ rowCount, imageDisplayHeight }: HorizontalMa
               title={image.title}
               width={image.displayWidth}
               height={imageDisplayHeight}
+              index={image.sequentialIndex}
+              showCount={showCount}
             />
           ))}
         </div>
