@@ -9,7 +9,7 @@ interface ImageCardProps {
 
 export function ImageCard({ src, title, width, height }: ImageCardProps) {
   return (
-    <div className="shrink-0">
+    <div className="shrink-0 select-none">
       <Image
         src={`/images/${src}`}
         alt={title}
