@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Horizontal Masonry
+
+A responsive horizontal masonry image gallery built with Next.js 15, React 19, and TypeScript. Features smooth horizontal scrolling, dynamic row layouts, and optimized image loading.
+
+![Screenshot](./public/screenshot.jpg)
+
+## Features
+
+- **Horizontal Masonry Layout** - Images flow horizontally in a masonry pattern
+- **Dynamic Row Configuration** - Toggle between 3, 4, or 5 rows
+- **Wheel to Horizontal Scroll** - Vertical mouse wheel events navigate horizontally
+- **Responsive Design** - Adapts image heights based on viewport
+- **Performance Optimized** - Request animation frame throttling and lazy loading
+- **Image Count Overlay** - Optional display of image index numbers
+- **Edge Fading** - Subtle fade effects at scroll boundaries
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then run the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) to view the gallery.
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js 15.5.4** - React framework with App Router and Turbopack
+- **React 19.1.0** - UI library
+- **TypeScript** - Type-safe development
+- **Tailwind CSS v4** - Utility-first styling
+- **Biome** - Fast linter and formatter
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm dev       # Start development server with Turbopack
+pnpm build     # Build for production
+pnpm start     # Start production server
+pnpm lint      # Run linting and auto-fix issues
+pnpm format    # Format code with Biome
+```
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+/app              # Next.js App Router
+  ├── page.tsx    # Main gallery page
+  ├── layout.tsx  # Root layout
+  └── globals.css # Global styles with Tailwind
+/components       # React components
+  ├── horizontal-masonry.tsx  # Main gallery component
+  └── toggle-group.tsx        # Row/count toggle controls
+/hooks           # Custom React hooks
+  ├── use-dynamic-image-height.tsx      # Responsive height calculation
+  └── use-wheel-to-horizontal-scroll.tsx # Wheel event conversion
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+Deploy easily on [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) or any platform that supports Next.js applications.
