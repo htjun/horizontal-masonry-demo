@@ -8,6 +8,14 @@
   @apply absolute top-0 h-full w-[40px] pointer-events-none bg-white backdrop-blur-[32px];
 }
 
+@utility font-geist-sans {
+  font-family: var(--font-geist-sans);
+}
+
+@utility font-geist-mono {
+  font-family: var(--font-geist-mono);
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
