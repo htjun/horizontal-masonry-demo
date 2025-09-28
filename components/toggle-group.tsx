@@ -15,20 +15,21 @@ export function ToggleGroup({ value, onValueChange, options, ariaLabel }: Toggle
     <ToggleGroupPrimitive.Root
       type="single"
       value={value}
-      onValueChange={onValueChange}
+      onValueChange={(newValue) => {
+        if (newValue) onValueChange(newValue)
+      }}
       aria-label={ariaLabel}
-      className="flex gap-0.5 items-center"
+      className="flex items-center"
     >
       {options.map((option) => (
         <ToggleGroupPrimitive.Item
           key={option.value}
           value={option.value}
           className={cn(
-            'px-2 py-0.5 text-xs font-medium transition-colors',
-            'hover:text-black data-[state=on]:text-black',
-            'data-[state=off]:text-black/50',
-            'focus:outline-none focus-visible:ring-1 focus-visible:ring-black/30',
-            'rounded-xs'
+            'text-xs font-medium rounded-sm size-6 cursor-pointer',
+            'opacity-50 hover:opacity-100 transition-all duration-150',
+            'data-[state=on]:bg-stone-100 data-[state=on]:opacity-100',
+            'focus:outline-none focus-visible:ring-1 focus-visible:ring-black/30'
           )}
         >
           {option.label}
