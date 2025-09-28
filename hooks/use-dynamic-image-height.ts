@@ -6,23 +6,29 @@ export function useDynamicImageHeight(
   containerRef: RefObject<HTMLElement | null>,
   rowCount: number
 ) {
-  const [imageHeight, setImageHeight] = useState(300) // Default fallback
+  const [imageHeight, setImageHeight] = useState(300)
 
   useLayoutEffect(() => {
     const container = containerRef.current
     if (!container) return
 
-    const calculateHeight = () => {
-      const viewportHeight = window.innerHeight
-      const gapSize = 4
-      const headerHeight = 56
-      const bottomPadding = 40
-      const totalGaps = (rowCount - 1) * gapSize
-      const availableHeight = viewportHeight - headerHeight - bottomPadding - totalGaps
-      const calculatedHeight = Math.floor(availableHeight / rowCount)
+    let rafId: number | null = null
 
-      // Ensure a reasonable minimum height
-      setImageHeight(Math.max(100, calculatedHeight))
+    const calculateHeight = () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+      }
+
+      rafId = requestAnimationFrame(() => {
+        const containerHeight = container.clientHeight
+        const gapSize = 4
+        const totalGaps = (rowCount - 1) * gapSize
+        const availableHeight = containerHeight - totalGaps
+        const calculatedHeight = Math.floor(availableHeight / rowCount)
+
+        setImageHeight(Math.max(100, calculatedHeight))
+        rafId = null
+      })
     }
 
     calculateHeight()
@@ -33,11 +39,11 @@ export function useDynamicImageHeight(
 
     resizeObserver.observe(container)
 
-    window.addEventListener('resize', calculateHeight)
-
     return () => {
       resizeObserver.disconnect()
-      window.removeEventListener('resize', calculateHeight)
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+      }
     }
   }, [containerRef, rowCount])
 
