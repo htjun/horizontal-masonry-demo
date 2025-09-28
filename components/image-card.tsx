@@ -11,7 +11,7 @@ interface ImageCardProps {
 
 export function ImageCard({ src, title, width, height, index, showCount }: ImageCardProps) {
   return (
-    <div className="shrink-0 select-none relative">
+    <div className="shrink-0 select-none relative" style={{ width, height }}>
       {showCount && (
         <div className="absolute top-1.5 left-1.5 font-geist-mono text-xs font-medium text-white/80 bg-black/20 backdrop-blur-sm rounded-xs h-5 min-w-5 px-0.5 tracking-tighter grid place-items-center">
           {index}
@@ -22,9 +22,10 @@ export function ImageCard({ src, title, width, height, index, showCount }: Image
         alt={title}
         width={width}
         height={height}
-        className="w-full object-cover"
+        className="object-cover"
         style={{
-          height: height,
+          width: '100%',
+          height: '100%',
         }}
       />
     </div>

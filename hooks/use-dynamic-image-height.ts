@@ -15,12 +15,14 @@ export function useDynamicImageHeight(
     const calculateHeight = () => {
       const viewportHeight = window.innerHeight
       const gapSize = 4
-      const verticalPadding = 80
+      const headerHeight = 56
+      const bottomPadding = 40
       const totalGaps = (rowCount - 1) * gapSize
-      const availableHeight = viewportHeight - totalGaps - verticalPadding
+      const availableHeight = viewportHeight - headerHeight - bottomPadding - totalGaps
       const calculatedHeight = Math.floor(availableHeight / rowCount)
 
-      setImageHeight(calculatedHeight)
+      // Ensure a reasonable minimum height
+      setImageHeight(Math.max(100, calculatedHeight))
     }
 
     calculateHeight()

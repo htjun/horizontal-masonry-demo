@@ -10,5 +10,9 @@ export function calculateDisplayWidth(
   imageHeight: number,
   imageDisplayHeight: number
 ) {
+  if (!imageHeight || imageHeight <= 0) {
+    return Math.round(imageDisplayHeight) // Return display height as width for 1:1 ratio fallback
+  }
+
   return Math.round((imageDisplayHeight / imageHeight) * imageWidth)
 }

@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { HorizontalMasonry } from '@/components/horizontal-masonry'
-import { Select } from '@/components/select'
+import { ToggleGroup } from '@/components/toggle-group'
 import { useDynamicImageHeight } from '@/hooks/use-dynamic-image-height'
 import { useWheelToHorizontalScroll } from '@/hooks/use-wheel-to-horizontal-scroll'
 
@@ -15,21 +15,23 @@ export default function Home() {
 
   return (
     <main ref={mainRef} className="min-h-screen w-full relative overflow-hidden">
-      <div className="w-full bg-white/80 border-b border-white/40 py-4 px-10 text-xs font-medium backdrop-blur-sm text-black/70 flex justify-between items-center">
-        <h1>Horizontal Masonry Feed</h1>
+      <div className="w-full bg-white/80 border-b border-white/40 py-2 min-h-14 px-10 text-xs font-medium backdrop-blur-sm text-black/70 flex justify-between items-center select-none">
+        <h1 className="cursor-default">Horizontal Masonry Feed</h1>
         <div className="flex gap-4 items-center">
-          <Select
-            value={rowCount}
-            onValueChange={setRowCount}
-            options={[
-              { value: '2', label: '2' },
-              { value: '3', label: '3' },
-              { value: '4', label: '4' },
-              { value: '5', label: '5' },
-            ]}
-            triggerPrefix="Row:"
-            ariaLabel="Row count"
-          />
+          <div className="flex gap-1.5 items-center">
+            <span>Rows:</span>
+            <ToggleGroup
+              value={rowCount}
+              onValueChange={setRowCount}
+              options={[
+                { value: '2', label: '2' },
+                { value: '3', label: '3' },
+                { value: '4', label: '4' },
+                { value: '5', label: '5' },
+              ]}
+              ariaLabel="Row count"
+            />
+          </div>
           <button
             onClick={() => setShowCount(!showCount)}
             className="hover:text-black transition-colors cursor-pointer select-none"

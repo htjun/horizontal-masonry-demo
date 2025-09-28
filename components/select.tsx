@@ -22,8 +22,13 @@ export function Select({
   return (
     <SelectPrimitive.Root value={value} onValueChange={onValueChange}>
       <SelectPrimitive.Trigger aria-label={ariaLabel}>
-        {triggerPrefix && `${triggerPrefix} `}
-        <SelectPrimitive.Value placeholder={placeholder} />
+        <button
+          type="button"
+          className="cursor-pointer hover:bg-stone-100 px-3 py-2 rounded-md transition-colors duration-150"
+        >
+          {triggerPrefix && `${triggerPrefix} `}
+          <SelectPrimitive.Value placeholder={placeholder} />
+        </button>
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Portal>
         <SelectPrimitive.Content
