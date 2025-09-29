@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen w-full relative overflow-hidden">
-      <div className="w-full bg-white/80 border-b border-white/40 py-2 min-h-14 px-10 text-xs font-medium backdrop-blur-sm text-black/70 flex flex-col sm:flex-row justify-between items-start sm:items-center select-none gap-2">
+      <div className="w-full bg-white/80 border-b border-white/40 py-2 min-h-14 sm:px-10 px-4 text-xs font-medium backdrop-blur-sm text-black/70 flex flex-col sm:flex-row justify-between items-start sm:items-center select-none gap-2">
         <h1 className="cursor-default">Horizontal Masonry Feed</h1>
         <div className="flex gap-6 items-center">
           <div className="flex gap-1.5 items-center">
@@ -47,9 +47,9 @@ export default function Home() {
       </div>
       <div
         ref={contentRef}
-        className="max-w-screen absolute translate-x-[-50%] left-1/2 top-14 bottom-0 mb-10"
+        className="max-w-screen absolute translate-x-[-50%] left-1/2 sm:top-14 bottom-0 mb-10 top-18"
       >
-        <div ref={scrollRef} className="overflow-x-auto no-scrollbar ps-10 pe-10">
+        <div ref={scrollRef} className="overflow-x-auto no-scrollbar sm:px-10 px-4">
           <HorizontalMasonry
             rowCount={Number(rowCount)}
             imageDisplayHeight={imageHeight}

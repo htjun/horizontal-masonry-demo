@@ -5,7 +5,7 @@
 }
 
 @utility edge-fade {
-  @apply absolute top-0 h-full w-[40px] pointer-events-none bg-white backdrop-blur-[32px];
+  @apply absolute top-0 h-full w-4 sm:w-10 pointer-events-none bg-white backdrop-blur-[32px];
 }
 
 @utility font-geist-sans {
