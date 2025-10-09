@@ -7,9 +7,18 @@ interface ImageCardProps {
   height: number
   index: number
   showCount: boolean
+  blurDataURL?: string
 }
 
-export function ImageCard({ src, title, width, height, index, showCount }: ImageCardProps) {
+export function ImageCard({
+  src,
+  title,
+  width,
+  height,
+  index,
+  showCount,
+  blurDataURL,
+}: ImageCardProps) {
   return (
     <div className="shrink-0 select-none relative" style={{ width, height }}>
       {showCount && (
@@ -22,6 +31,8 @@ export function ImageCard({ src, title, width, height, index, showCount }: Image
         alt={title}
         width={width}
         height={height}
+        placeholder={blurDataURL ? 'blur' : 'empty'}
+        blurDataURL={blurDataURL}
         className="object-cover"
         style={{
           width: '100%',

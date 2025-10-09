@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "pnpm generate-blur && next build --turbopack",
     "start": "next start",
     "lint": "biome check --write",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "generate-blur": "tsx scripts/generate-blur-data.ts"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",
@@ -24,7 +25,9 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

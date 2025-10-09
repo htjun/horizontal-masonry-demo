@@ -53,6 +53,7 @@ export function HorizontalMasonry({
               height={imageDisplayHeight}
               index={image.sequentialIndex}
               showCount={showCount}
+              blurDataURL={image.blurDataURL}
             />
           ))}
         </div>
