@@ -8,7 +8,7 @@ import { useWheelToHorizontalScroll } from '@/hooks/use-wheel-to-horizontal-scro
 export default function Home() {
   const scrollRef = useWheelToHorizontalScroll<HTMLDivElement>()
   const [rowCount, setRowCount] = useState('3')
-  const [showCount, setShowCount] = useState(false)
+  const [isCountVisible, setIsCountVisible] = useState(false)
 
   return (
     <main className="min-h-screen w-full relative overflow-hidden">
@@ -31,8 +31,8 @@ export default function Home() {
           <div className="flex gap-1.5 items-center">
             <span>Count:</span>
             <ToggleGroup
-              value={showCount ? 'on' : 'off'}
-              onValueChange={(value) => setShowCount(value === 'on')}
+              value={isCountVisible ? 'on' : 'off'}
+              onValueChange={(value) => setIsCountVisible(value === 'on')}
               options={[
                 { value: 'off', label: 'Off' },
                 { value: 'on', label: 'On' },
@@ -44,7 +44,7 @@ export default function Home() {
       </div>
       <div className="max-w-screen absolute translate-x-[-50%] left-1/2 sm:top-14 bottom-0 mb-10 top-18">
         <div ref={scrollRef} className="overflow-x-auto no-scrollbar sm:px-10 px-4 h-full">
-          <HorizontalMasonry rowCount={Number(rowCount)} showCount={showCount} />
+          <HorizontalMasonry rowCount={Number(rowCount)} isCountVisible={isCountVisible} />
         </div>
         <div className="edge-fade left-0 mask-linear-[to_right,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />
         <div className="edge-fade right-0 mask-linear-[to_left,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />

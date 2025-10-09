@@ -6,12 +6,12 @@ import { ImageCard } from './image-card'
 
 interface HorizontalMasonryProps {
   rowCount: number
-  showCount: boolean
+  isCountVisible: boolean
 }
 
 type ImageWithRow = ImageData & { sequentialIndex: number }
 
-export function HorizontalMasonry({ rowCount, showCount }: HorizontalMasonryProps) {
+export function HorizontalMasonry({ rowCount, isCountVisible }: HorizontalMasonryProps) {
   const imageRows = useMemo(() => {
     const rows: ImageWithRow[][] = Array.from({ length: rowCount }, () => [])
     const rowAspectRatios = Array(rowCount).fill(0)
@@ -49,7 +49,7 @@ export function HorizontalMasonry({ rowCount, showCount }: HorizontalMasonryProp
               title={image.title}
               aspectRatio={image.width / image.height}
               index={image.sequentialIndex}
-              showCount={showCount}
+              isCountVisible={isCountVisible}
               blurDataURL={image.blurDataURL}
               height={rowHeight}
             />
