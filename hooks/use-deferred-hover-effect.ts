@@ -3,7 +3,7 @@ import { useRef, useState, useEffect, type RefObject } from 'react'
 interface UseDeferredHoverEffectOptions {
   delay?: number
   scrollDebounce?: number
-  scrollContainerRef?: RefObject<HTMLElement>
+  scrollContainerRef?: RefObject<HTMLElement | null>
 }
 
 export function useDeferredHoverEffect(options: UseDeferredHoverEffectOptions = {}) {

@@ -8,7 +8,7 @@ import { ImageCard } from './image-card'
 interface HorizontalMasonryProps {
   rowCount: number
   isCountVisible: boolean
-  scrollContainerRef?: RefObject<HTMLElement>
+  scrollContainerRef?: RefObject<HTMLElement | null>
 }
 
 type ImageWithRow = ImageData & { sequentialIndex: number }
