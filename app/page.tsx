@@ -1,17 +1,14 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { HorizontalMasonry } from '@/components/horizontal-masonry'
 import { ToggleGroup } from '@/components/toggle-group'
-import { useDynamicImageHeight } from '@/hooks/use-dynamic-image-height'
 import { useWheelToHorizontalScroll } from '@/hooks/use-wheel-to-horizontal-scroll'
 
 export default function Home() {
   const scrollRef = useWheelToHorizontalScroll<HTMLDivElement>()
-  const contentRef = useRef<HTMLDivElement>(null)
   const [rowCount, setRowCount] = useState('3')
   const [showCount, setShowCount] = useState(false)
-  const imageHeight = useDynamicImageHeight(contentRef, Number(rowCount))
 
   return (
     <main className="min-h-screen w-full relative overflow-hidden">
@@ -45,16 +42,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div
-        ref={contentRef}
-        className="max-w-screen absolute translate-x-[-50%] left-1/2 sm:top-14 bottom-0 mb-10 top-18"
-      >
-        <div ref={scrollRef} className="overflow-x-auto no-scrollbar sm:px-10 px-4">
-          <HorizontalMasonry
-            rowCount={Number(rowCount)}
-            imageDisplayHeight={imageHeight}
-            showCount={showCount}
-          />
+      <div className="max-w-screen absolute translate-x-[-50%] left-1/2 sm:top-14 bottom-0 mb-10 top-18">
+        <div ref={scrollRef} className="overflow-x-auto no-scrollbar sm:px-10 px-4 h-full">
+          <HorizontalMasonry rowCount={Number(rowCount)} showCount={showCount} />
         </div>
         <div className="edge-fade left-0 mask-linear-[to_right,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />
         <div className="edge-fade right-0 mask-linear-[to_left,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />

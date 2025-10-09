@@ -2,42 +2,40 @@
 
 import { useMemo } from 'react'
 import { type ImageData, images } from '@/data/images'
-import { calculateDisplayWidth } from '@/lib/utils'
 import { ImageCard } from './image-card'
 
 interface HorizontalMasonryProps {
   rowCount: number
-  imageDisplayHeight: number
   showCount: boolean
 }
 
-type ImageWithDisplayDimensions = ImageData & { displayWidth: number; sequentialIndex: number }
+type ImageWithRow = ImageData & { sequentialIndex: number }
 
-export function HorizontalMasonry({
-  rowCount,
-  imageDisplayHeight,
-  showCount,
-}: HorizontalMasonryProps) {
+export function HorizontalMasonry({ rowCount, showCount }: HorizontalMasonryProps) {
   const imageRows = useMemo(() => {
-    const rows: ImageWithDisplayDimensions[][] = Array.from({ length: rowCount }, () => [])
-    const rowWidths = Array(rowCount).fill(0)
+    const rows: ImageWithRow[][] = Array.from({ length: rowCount }, () => [])
+    const rowAspectRatios = Array(rowCount).fill(0)
 
-    // Distribute images to the row with least total width
+    // Distribute images to the row with least total aspect ratio
     images.forEach((image, index) => {
-      const imageDisplayWidth = calculateDisplayWidth(image.width, image.height, imageDisplayHeight)
-      const imageWithDimensions: ImageWithDisplayDimensions = {
+      const aspectRatio = image.width / image.height
+      const imageWithRow: ImageWithRow = {
         ...image,
-        displayWidth: imageDisplayWidth,
         sequentialIndex: index + 1,
       }
 
-      const minWidthIndex = rowWidths.indexOf(Math.min(...rowWidths))
-      rows[minWidthIndex].push(imageWithDimensions)
-      rowWidths[minWidthIndex] += imageDisplayWidth
+      const minAspectIndex = rowAspectRatios.indexOf(Math.min(...rowAspectRatios))
+      rows[minAspectIndex].push(imageWithRow)
+      rowAspectRatios[minAspectIndex] += aspectRatio
     })
 
     return rows
-  }, [rowCount, imageDisplayHeight])
+  }, [rowCount])
+
+  // Calculate row height: (viewport - header - bottom margin - gaps) / rowCount
+  // Header: 3.5rem, Bottom margin: 2.5rem, Gap: 0.25rem (1px * 4)
+  const gapSize = 0.25 * (rowCount - 1) // gap-1 = 0.25rem
+  const rowHeight = `calc((100vh - 3.5rem - 2.5rem - ${gapSize}rem) / ${rowCount})`
 
   return (
     <div className="flex flex-col gap-1 w-max">
@@ -49,11 +47,11 @@ export function HorizontalMasonry({
               key={image.id}
               src={image.fileName}
               title={image.title}
-              width={image.displayWidth}
-              height={imageDisplayHeight}
+              aspectRatio={image.width / image.height}
               index={image.sequentialIndex}
               showCount={showCount}
               blurDataURL={image.blurDataURL}
+              height={rowHeight}
             />
           ))}
         </div>
