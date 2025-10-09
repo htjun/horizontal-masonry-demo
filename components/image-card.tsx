@@ -8,6 +8,7 @@ interface ImageCardProps {
   isCountVisible: boolean
   blurDataURL?: string
   height: string
+  rowCount: number
 }
 
 export function ImageCard({
@@ -18,7 +19,14 @@ export function ImageCard({
   isCountVisible,
   blurDataURL,
   height,
+  rowCount,
 }: ImageCardProps) {
+  // Calculate height in vh: (100vh - header - margin - gaps) / rowCount
+  // Header: 3.5rem ≈ 3.5vh, Bottom margin: 2.5rem ≈ 2.5vh, Gaps: negligible
+  const heightVh = (100 - 6) / rowCount // Approximate vh for this row
+  const widthVh = Math.round(heightVh * aspectRatio) // Width based on aspect ratio
+  const sizes = `${widthVh}vh`
+
   return (
     <div className="shrink-0 select-none relative" style={{ height, aspectRatio }}>
       {isCountVisible && (
@@ -30,7 +38,7 @@ export function ImageCard({
         src={`/images/${src}`}
         alt={title}
         fill
-        sizes="(max-width: 640px) 50vw, 33vw"
+        sizes={sizes}
         placeholder={blurDataURL ? 'blur' : 'empty'}
         blurDataURL={blurDataURL}
         className="object-cover"

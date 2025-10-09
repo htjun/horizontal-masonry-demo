@@ -52,6 +52,7 @@ export function HorizontalMasonry({ rowCount, isCountVisible }: HorizontalMasonr
               isCountVisible={isCountVisible}
               blurDataURL={image.blurDataURL}
               height={rowHeight}
+              rowCount={rowCount}
             />
           ))}
         </div>
