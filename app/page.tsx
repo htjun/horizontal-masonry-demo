@@ -44,7 +44,11 @@ export default function Home() {
       </div>
       <div className="max-w-screen absolute translate-x-[-50%] left-1/2 sm:top-14 bottom-0 mb-10 top-18">
         <div ref={scrollRef} className="overflow-x-auto no-scrollbar sm:px-10 px-4 h-full">
-          <HorizontalMasonry rowCount={Number(rowCount)} isCountVisible={isCountVisible} />
+          <HorizontalMasonry
+            rowCount={Number(rowCount)}
+            isCountVisible={isCountVisible}
+            scrollContainerRef={scrollRef}
+          />
         </div>
         <div className="edge-fade left-0 mask-linear-[to_right,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />
         <div className="edge-fade right-0 mask-linear-[to_left,black,rgba(0,0,0,0.5)_40%,rgba(0,0,0,0.1)_80%,transparent]" />

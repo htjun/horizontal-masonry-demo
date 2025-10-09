@@ -1,17 +1,26 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, type RefObject } from 'react'
 import { type ImageData, images } from '@/data/images'
+import { useDeferredHoverEffect } from '@/hooks/use-deferred-hover-effect'
 import { ImageCard } from './image-card'
 
 interface HorizontalMasonryProps {
   rowCount: number
   isCountVisible: boolean
+  scrollContainerRef?: RefObject<HTMLElement>
 }
 
 type ImageWithRow = ImageData & { sequentialIndex: number }
 
-export function HorizontalMasonry({ rowCount, isCountVisible }: HorizontalMasonryProps) {
+export function HorizontalMasonry({
+  rowCount,
+  isCountVisible,
+  scrollContainerRef,
+}: HorizontalMasonryProps) {
+  const { hoveredId, isInstantHover, handleItemEnter, handleItemLeave, handleContainerLeave } =
+    useDeferredHoverEffect({ scrollContainerRef })
+
   const imageRows = useMemo(() => {
     const rows: ImageWithRow[][] = Array.from({ length: rowCount }, () => [])
     const rowAspectRatios = Array(rowCount).fill(0)
@@ -38,7 +47,12 @@ export function HorizontalMasonry({ rowCount, isCountVisible }: HorizontalMasonr
   const rowHeight = `calc((100vh - 3.5rem - 2.5rem - ${gapSize}rem) / ${rowCount})`
 
   return (
-    <div className="flex flex-col gap-1 w-max">
+    // biome-ignore lint/a11y/noStaticElementInteractions: Mouse leave resets visual hover effect only
+    <div
+      className="flex flex-col gap-1 w-max"
+      onMouseLeave={handleContainerLeave}
+      data-instant-hover={isInstantHover || undefined}
+    >
       {imageRows.map((row, index) => (
         // biome-ignore lint: array index key
         <div key={index} className="flex gap-1 [&>*:last-child]:grow">
@@ -53,6 +67,10 @@ export function HorizontalMasonry({ rowCount, isCountVisible }: HorizontalMasonr
               blurDataURL={image.blurDataURL}
               height={rowHeight}
               rowCount={rowCount}
+              onMouseEnter={() => handleItemEnter(image.id)}
+              onMouseLeave={handleItemLeave}
+              isDimmed={hoveredId !== null && hoveredId !== image.id}
+              isInstantHover={isInstantHover}
             />
           ))}
         </div>
