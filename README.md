@@ -9,10 +9,13 @@ A responsive horizontal masonry image gallery built with Next.js 15, React 19, a
 - **Horizontal Masonry Layout** - Images flow horizontally in a masonry pattern
 - **Dynamic Row Configuration** - Toggle between 3, 4, or 5 rows
 - **Wheel to Horizontal Scroll** - Vertical mouse wheel events navigate horizontally
+- **Deferred Hover Effect** - Images dim after 1-second hover, with instant mode for subsequent hovers
+- **Scroll-Aware Interactions** - Hover effects disabled during scrolling for better UX
 - **Responsive Design** - Adapts image heights based on viewport
 - **Performance Optimized** - Request animation frame throttling and lazy loading
 - **Image Count Overlay** - Optional display of image index numbers
 - **Edge Fading** - Subtle fade effects at scroll boundaries
+- **Blur Placeholders** - Smooth image loading with blur-up effect
 
 ## Getting Started
 
@@ -57,10 +60,16 @@ pnpm format    # Format code with Biome
   └── globals.css # Global styles with Tailwind
 /components       # React components
   ├── horizontal-masonry.tsx  # Main gallery component
-  └── toggle-group.tsx        # Row/count toggle controls
-/hooks           # Custom React hooks
-  ├── use-dynamic-image-height.tsx      # Responsive height calculation
-  └── use-wheel-to-horizontal-scroll.tsx # Wheel event conversion
+  ├── image-card.tsx          # Individual image card with hover effects
+  ├── toggle-group.tsx        # Row/count toggle controls
+  └── select.tsx              # Select component
+/hooks            # Custom React hooks
+  ├── use-deferred-hover-effect.ts       # Deferred hover with scroll detection
+  └── use-wheel-to-horizontal-scroll.ts  # Wheel event conversion
+/data             # Data files
+  └── images.ts   # Image metadata with blur placeholders
+/lib              # Utilities
+  └── utils.ts    # Helper functions (cn, etc.)
 ```
 
 ## Deployment
