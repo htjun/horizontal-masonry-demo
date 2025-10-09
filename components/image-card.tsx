@@ -43,7 +43,7 @@ export function ImageCard({
         'shrink-0 select-none relative transition-opacity',
         isInstantHover ? 'duration-150' : 'duration-300'
       )}
-      style={{ height, aspectRatio, opacity: isDimmed ? 0.5 : 1 }}
+      style={{ height, aspectRatio, opacity: isDimmed ? 0.7 : 1 }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
