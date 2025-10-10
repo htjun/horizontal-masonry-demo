@@ -11,7 +11,7 @@ interface HorizontalMasonryProps {
   scrollContainerRef?: RefObject<HTMLElement | null>
 }
 
-type ImageWithRow = ImageData & { sequentialIndex: number }
+type ImageWithIndex = ImageData & { sequentialIndex: number }
 
 export function HorizontalMasonry({
   rowCount,
@@ -22,20 +22,20 @@ export function HorizontalMasonry({
     useDeferredHoverEffect({ scrollContainerRef })
 
   const imageRows = useMemo(() => {
-    const rows: ImageWithRow[][] = Array.from({ length: rowCount }, () => [])
-    const rowAspectRatios = Array(rowCount).fill(0)
+    const rows: ImageWithIndex[][] = Array.from({ length: rowCount }, () => [])
+    const rowAspectSums = Array(rowCount).fill(0)
 
-    // Distribute images to the row with least total aspect ratio
+    // Distribute images to the shortest row (by cumulative aspect ratio)
     images.forEach((image, index) => {
       const aspectRatio = image.width / image.height
-      const imageWithRow: ImageWithRow = {
+      const imageWithIndex: ImageWithIndex = {
         ...image,
         sequentialIndex: index + 1,
       }
 
-      const minAspectIndex = rowAspectRatios.indexOf(Math.min(...rowAspectRatios))
-      rows[minAspectIndex].push(imageWithRow)
-      rowAspectRatios[minAspectIndex] += aspectRatio
+      const shortestRowIndex = rowAspectSums.indexOf(Math.min(...rowAspectSums))
+      rows[shortestRowIndex].push(imageWithIndex)
+      rowAspectSums[shortestRowIndex] += aspectRatio
     })
 
     return rows
