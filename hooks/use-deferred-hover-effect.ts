@@ -84,7 +84,6 @@ export function useDeferredHoverEffect(options: UseDeferredHoverEffectOptions = 
   return {
     hoveredId,
     isInstantHover,
-    isScrolling,
     handleItemEnter,
     handleItemLeave,
     handleContainerLeave,

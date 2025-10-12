@@ -48,11 +48,7 @@ export function HorizontalMasonry({
 
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: Mouse leave resets visual hover effect only
-    <div
-      className="flex flex-col gap-1 w-max"
-      onMouseLeave={handleContainerLeave}
-      data-instant-hover={isInstantHover || undefined}
-    >
+    <div className="flex flex-col gap-1 w-max" onMouseLeave={handleContainerLeave}>
       {imageRows.map((row, index) => (
         // biome-ignore lint: array index key
         <div key={index} className="flex gap-1 [&>*:last-child]:grow">
